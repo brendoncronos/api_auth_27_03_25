@@ -1,8 +1,5 @@
-const express = require('express');
-const router = express.Router();
-const upload = require('../middleware/upload');
-const controller = require('../controllers/uploadController');
-const auth = require('../middleware/authMiddleware');
-
-router.post('/', auth, upload.single('foto'), controller.enviar);
-module.exports = router;
+exports.enviar = (req, res) => {
+    if (!req.file) return res.status(400).json({ erro: 'Nenhum arquivo enviado' });
+    res.json({ nomeArquivo: req.file.filename });
+  };
+  
